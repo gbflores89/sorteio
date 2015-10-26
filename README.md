@@ -1,1 +1,1 @@
-Projeto em eclipse para sortear um nome de uma lista
+Projeto em JAVA (eclipse.org) para sortear um nome de uma lista
