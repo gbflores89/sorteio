@@ -1,12 +1,15 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -110,18 +113,24 @@ public class Raffle extends JFrame{
 		panel.add(namesProgressiveButton, BorderLayout.CENTER);
 		ImageIcon image = null;
 		JLabel imageLabel = null;
+		int height = 300;
+		int width = 300;
+		double proportion = 1.0;
 		try {
-			image = new ImageIcon(ImageIO.read(new File("eventImage.png")));
+			BufferedImage img = ImageIO.read(new File("eventImage.png"));
+			height = (int)(img.getHeight()*proportion);
+			width = (int)(img.getWidth()*proportion);
+			image = new ImageIcon(img.getScaledInstance(width, height, Image.SCALE_SMOOTH));
 			imageLabel = new JLabel(image);
 		} catch (IOException e) {
 			imageLabel = new JLabel("<html>\"eventImage.png\" <br> not found</html>");
 			imageLabel.setFont(imageLabel.getFont().deriveFont(Font.BOLD, mediumFontSize));
 
 		}
-		
+		imageLabel.setPreferredSize(new Dimension(width+(int)(width*0.1),height+(int)(height*0.1)));
 		panel.add(imageLabel, BorderLayout.WEST);
-		
 		pack();
+		
 		double xSize = getWidth();
 		double ySize = getHeight();
 
